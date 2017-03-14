@@ -6,13 +6,15 @@ import random
 ## As usual, this HW is worth 500 points in total.
 ## There are 10 problems. Each one is worth 50 points.
 
-## There are tests for each problem; you should also follow the instructions for things to do in the code that cannot be tested with unit tests, e.g. using certain structures.
+## There are tests for each problem; you should also follow the instructions for things to do in the code that cannot be tested 
+## with unit tests, e.g. using certain structures.
 
 
 ## [PROBLEM 1]
 print("\n\n***** Problem 1 *****")
 ## We've provided a definition of a class Student, similar to the one you may have seen in lecture. 
-## Add a method to class Student called write_programs which accepts one optional parameter with a default value of 1, and adds the input integer to the self.num_programs instance variable.
+## Add a method to class Student called write_programs which accepts one optional parameter with a default value of 1, and adds the 
+## input integer to the self.num_programs instance variable.
 
 class Student():
     def __init__(self, name, years_at_umich=1, programs_written=0):
@@ -31,7 +33,8 @@ class Student():
         return this_Student.years_UM
 
     # Define the additional method here
-    
+    def write_programs(self, optional_param=1):
+        self.num_programs += optional_param
 
 #### DONE WITH STUDENT CLASS DEFINITION
 

@@ -36,6 +36,10 @@ class Student():
     def write_programs(self, optional_param=1):
         self.num_programs += optional_param
 
+    # def prog_productivity(self, years_at_umich=1, programs_written=0):
+    #     programming_productivity = self.num_programs/self.years_UM
+    #     return programming_productivity
+
 #### DONE WITH STUDENT CLASS DEFINITION
 
     
@@ -51,23 +55,19 @@ pst.shout("I'm doing awesome on this problem set.")  # This should print: I'm do
 print("===========")
 
 ## [PROBLEM 2]
-print("\n\n***** Problem 2 *****")
-def personal_map(func,lst):
-    newlist = []
-    for item in lst:
-        newlist.append(func(item))
-
-    return newlist
-
 ## Define a function called personal_map. This function should do a very similar thing to the Python built-in map function.
 ## It should take as input one function object (required), and one list (required), in that order.
 ## The function should invoke the input function upon each element of the input list, and accumulate the return values to a new list.
 ## The function should return the new list of accumulated -- mapped! -- values.
 ## HINT: you should be able to write this in 5 lines of code or fewer! 
+print("\n\n***** Problem 2 *****")
+def personal_map(func,lst):
+    newlist = []
+    for item in lst:
+        item = str(func(item))
+        newlist.append(func(item))
 
-
-
-
+    return newlist
 
 
 ## [PROBLEM 3]
@@ -114,7 +114,11 @@ print("\n\n***** Problem 5 *****")
 ## and save that list in a variable called programmers. You should make sure you pass these tests before continuing, as you'll 
 ##need this list for problems later on!
 programmers = [Student(x, y, z) for x, y, z in student_tups_list]
+print(programmers)
 
+def problem_6_funct(student):
+    programming_productivity = student.num_programs/student.years_UM
+    return programming_productivity
 
 ## [PROBLEM 6]
 print("\n\n***** Problem 6 *****")
@@ -124,8 +128,11 @@ print("\n\n***** Problem 6 *****")
 
 # Use the Python map function on the programmers list you just created, in order to create an map instance iterator of numbers 
 ## representing the productivity of each student. Save the map iterator in a variable called prod_iter.
+prod_iter = iter([personal_map(problem_6_funct(student), programmers) for student in programmers])
 
 ## Write code to cast that iterator to a list. Save that list in the variable prod_list.
+#prod_list = list(prod_iter)
+#print(prod_list)
 
 ## You may add a method to the Student class if you wish in order to do this, but you do not need to. (If you do, make sure you 
 ## do not create any syntax errors that keep code/tests from running!)

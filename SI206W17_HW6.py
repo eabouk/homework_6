@@ -181,19 +181,9 @@ print("\n\n***** Problem 10 *****")
 
 ## Define a function called readfiles, which accepts a list of filenames as input and yields each line in each of the files with that 
 #  name, assuming those files exist in the same directory as this program.
-def readfiles(files):
-    for f in files:
-        file_reader = open(f, 'r')
-        for line in file_reader:
-            yield line
-        file_reader.close()
 
 ## Define a generator called len_check which accepts a generator of file lines and returns a generator object of all the lines it's 
 #  accepted whose length is longer than 40 characters.
-def len_check(file_gen):
-    for line in file_gen:
-        if len(file_gen) > 40:
-            yield line 
 
 ## Finally, write a function called main_filterer that accepts a list of filenames (strings), and returns a generator of all the 
 ## lines in those files that are longer than 40 characters. The function should invoke the other function and generator, readfiles 
@@ -209,14 +199,26 @@ def len_check(file_gen):
 ## files for testing.
 
 # Define readfiles (make sure to close the file reference in the right place)
-
+def readfiles(files):
+    for f in files:
+        file_reader = open(f, 'r')
+        for line in file_reader:
+            yield line
+        file_reader.close()
 
 # Define len_check
+def len_check(file_gen):
+    for line in file_gen:
+        if len(line) > 40:
+            yield line 
 
 
 # Define main_filterer
-
-
+def main_filterer(list_files):
+    for f in list_files:
+        for line in f:
+            if len(line) > 40:
+                yield line
 
 ## Uncomment this code to test so you can see easily what results from your code. DO uncomment it. DO NOT delete or change it. 
 ## (You can add other code above while you work, of course.)

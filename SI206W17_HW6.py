@@ -36,9 +36,9 @@ class Student():
     def write_programs(self, optional_param=1):
         self.num_programs += optional_param
 
-    # def prog_productivity(self, years_at_umich=1, programs_written=0):
-    #     programming_productivity = self.num_programs/self.years_UM
-    #     return programming_productivity
+    def prog_productivity(self, years_at_umich=1, programs_written=0):
+        programming_productivity = self.num_programs/self.years_UM
+        return programming_productivity
 
 #### DONE WITH STUDENT CLASS DEFINITION
 
@@ -48,6 +48,7 @@ print("===========")
 pst = Student("Jay", 3, 2)
 print(pst)  # This should print: My name is Jay, and I've been at UMich for about 3 years. I got <some number 0-1000> of bonus points and I have written 2 programs while here.
 pst.shout("I'm doing awesome on this problem set.")  # This should print: I'm doing awesome on this problem set.
+print(type(pst))
 
 ## Feel free to add more testing code here to help you understand the class definition, especially to try out your write_programs method...
 
@@ -64,8 +65,8 @@ print("\n\n***** Problem 2 *****")
 def personal_map(func,lst):
     newlist = []
     for item in lst:
-        item = str(func(item))
-        newlist.append(func(item))
+        x = func(item)
+        newlist.append(x)
 
     return newlist
 
@@ -121,18 +122,20 @@ def problem_6_funct(student):
     return programming_productivity
 
 ## [PROBLEM 6]
+# not done yet
 print("\n\n***** Problem 6 *****")
-
+for student in programmers:
+    print(problem_6_funct(student))
 # A Student's programming_productivity is defined as that student's number of programs written divided by the years they have 
 ## been at UMich.
 
 # Use the Python map function on the programmers list you just created, in order to create an map instance iterator of numbers 
 ## representing the productivity of each student. Save the map iterator in a variable called prod_iter.
-prod_iter = iter([personal_map(problem_6_funct(student), programmers) for student in programmers])
+prod_iter = map(problem_6_funct, programmers)
 
 ## Write code to cast that iterator to a list. Save that list in the variable prod_list.
-#prod_list = list(prod_iter)
-#print(prod_list)
+prod_list = list(prod_iter)
+
 
 ## You may add a method to the Student class if you wish in order to do this, but you do not need to. (If you do, make sure you 
 ## do not create any syntax errors that keep code/tests from running!)
@@ -264,11 +267,11 @@ class Problem5(unittest.TestCase):
     def test_programmers_list3(self):
         self.assertEqual([x.name for x in programmers],["Albert","Bisi","Mai","Dinesh","Euijin"])
 
-# class Problem6(unittest.TestCase):
-#     def test_prod_iter(self):
-#         self.assertEqual(type(prod_iter),type(map(lambda x:-x,[2,3])))
-#     def test_prod_list(self):
-#         self.assertEqual(prod_list,[10.0,100.0,10.0,32.75,15.333333333333334])
+class Problem6(unittest.TestCase):
+    def test_prod_iter(self):
+        self.assertEqual(type(prod_iter),type(map(lambda x:-x,[2,3])))
+    def test_prod_list(self):
+        self.assertEqual(prod_list,[10.0,100.0,10.0,32.75,15.333333333333334])
 
 # class Problem7(unittest.TestCase):
 #     def test_names_and_productivities(self):

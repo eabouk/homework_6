@@ -36,10 +36,6 @@ class Student():
     def write_programs(self, optional_param=1):
         self.num_programs += optional_param
 
-    def prog_productivity(self, years_at_umich=1, programs_written=0):
-        programming_productivity = self.num_programs/self.years_UM
-        return programming_productivity
-
 #### DONE WITH STUDENT CLASS DEFINITION
 
     
@@ -115,17 +111,16 @@ print("\n\n***** Problem 5 *****")
 ## and save that list in a variable called programmers. You should make sure you pass these tests before continuing, as you'll 
 ##need this list for problems later on!
 programmers = [Student(x, y, z) for x, y, z in student_tups_list]
-print(programmers)
 
 def problem_6_funct(student):
     programming_productivity = student.num_programs/student.years_UM
     return programming_productivity
 
 ## [PROBLEM 6]
-# not done yet
+
 print("\n\n***** Problem 6 *****")
-for student in programmers:
-    print(problem_6_funct(student))
+
+
 # A Student's programming_productivity is defined as that student's number of programs written divided by the years they have 
 ## been at UMich.
 
@@ -133,8 +128,10 @@ for student in programmers:
 ## representing the productivity of each student. Save the map iterator in a variable called prod_iter.
 prod_iter = map(problem_6_funct, programmers)
 
+
 ## Write code to cast that iterator to a list. Save that list in the variable prod_list.
 prod_list = list(prod_iter)
+print(prod_list)
 
 
 ## You may add a method to the Student class if you wish in order to do this, but you do not need to. (If you do, make sure you 
@@ -147,6 +144,7 @@ print("\n\n***** Problem 7 *****")
 # Create a list of tuples wherein each tuple has a student's name and productivity value. Save the list of tuples in a variable 
 ## called names_and_productivities. To do this, you should use a list comprehension (you may also use the zip function, and you 
 ## may use any variables you have already created).
+names_and_productivities = list(zip(names, prod_list))
 
 ## But be careful that if you use answers from previous problems, you use the LISTs you generated, so that all your tests can 
 ## still pass and you avoid confusion!
@@ -158,21 +156,23 @@ print("\n\n***** Problem 8 *****")
 # Use the Python filter function to select the subset of programmers who have names with 5 or more characters. (i.e. ["Albert",
 ## "Dinesh","Euijin"]) Your result should be an filter object that points to Student instances. Save that filter iterator in a 
 ## variable called long_names.
-
-
+long_names = filter(lambda x: len(x.name) >= 5, programmers)
+print(long_names)
+#you have to be using the student instance thing not the list of names
 
 ## Then write code to cast the value of long_names to a list and save it in the variable long_names_list. 
-
+long_names_list = list(long_names)
+print(long_names_list)
 
 
 ## [PROBLEM 9]
 print("\n\n***** Problem 9 *****")
-
+names_with_not_too_much_seniority = [student.name for student in programmers if student.years_UM < len(student.name)]
 # Use a list comprehension to generate a LIST of just the names of those Student instances whose name is longer than their seniority 
 ## (i.e., ["Albert", "Mai", "Dinesh", "Euijin"]). Assign it to a variable called names_with_not_too_much_seniority.
 
 ## Note that you can use another list you have already created for this problem.
-
+print(names_with_not_too_much_seniority)
 
 
 
@@ -273,23 +273,23 @@ class Problem6(unittest.TestCase):
     def test_prod_list(self):
         self.assertEqual(prod_list,[10.0,100.0,10.0,32.75,15.333333333333334])
 
-# class Problem7(unittest.TestCase):
-#     def test_names_and_productivities(self):
-#         self.assertEqual(names_and_productivities,[('Albert', 10.0), ('Bisi', 100.0), ('Mai', 10.0), ('Dinesh', 32.75), ('Euijin', 15.333333333333334)])
+class Problem7(unittest.TestCase):
+    def test_names_and_productivities(self):
+        self.assertEqual(names_and_productivities,[('Albert', 10.0), ('Bisi', 100.0), ('Mai', 10.0), ('Dinesh', 32.75), ('Euijin', 15.333333333333334)])
 
-# class Problem8(unittest.TestCase):
-#     def test_long_names(self):
-#         self.assertEqual(type(filter(lambda x: x>2,[2,5])),type(long_names))
-#     def test_long_names_list(self):
-#         self.assertEqual(type(long_names_list),type([]))
-#     def test_long_names_list_instances(self):
-#         self.assertEqual(type(long_names_list[1]),type(Student("Dinah")))
-#     def test_long_names_list2(self):
-#         self.assertEqual([x.name for x in long_names_list],["Albert","Dinesh","Euijin"])
+class Problem8(unittest.TestCase):
+    def test_long_names(self):
+        self.assertEqual(type(filter(lambda x: x>2,[2,5])),type(long_names))
+    def test_long_names_list(self):
+        self.assertEqual(type(long_names_list),type([]))
+    def test_long_names_list_instances(self):
+        self.assertEqual(type(long_names_list[1]),type(Student("Dinah")))
+    def test_long_names_list2(self):
+        self.assertEqual([x.name for x in long_names_list],["Albert","Dinesh","Euijin"])
 
-# class Problem9(unittest.TestCase):
-#     def test_names_without_much_seniority(self):
-#         self.assertEqual(names_with_not_too_much_seniority,['Albert', 'Mai', 'Dinesh', 'Euijin'])
+class Problem9(unittest.TestCase):
+    def test_names_without_much_seniority(self):
+        self.assertEqual(names_with_not_too_much_seniority,['Albert', 'Mai', 'Dinesh', 'Euijin'])
 
 # class Problem10(unittest.TestCase):
 #     def test_generator1(self):

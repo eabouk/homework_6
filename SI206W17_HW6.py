@@ -215,17 +215,14 @@ def len_check(file_gen):
 
 # Define main_filterer
 def main_filterer(list_files):
-    for f in list_files:
-        for line in f:
-            if len(line) > 40:
-                yield line
+    return len_check(readfiles(list_files))
 
 ## Uncomment this code to test so you can see easily what results from your code. DO uncomment it. DO NOT delete or change it. 
 ## (You can add other code above while you work, of course.)
 
-# provided_file_names = ["samplehw6_1.txt","samplehw6_2.txt"]
-# for ln in main_filterer(provided_file_names):
-#     print(ln.rstrip('\n'), end=" ")
+provided_file_names = ["samplehw6_1.txt","samplehw6_2.txt"]
+for ln in main_filterer(provided_file_names):
+    print(ln.rstrip('\n'), end=" ")
 #####
 
 

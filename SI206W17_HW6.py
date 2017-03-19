@@ -179,11 +179,21 @@ print(names_with_not_too_much_seniority)
 ## [PROBLEM 10]
 print("\n\n***** Problem 10 *****")
 
-## Define a function called readfiles, which accepts a list of filenames as input and yields each line in each of the file with that 
+## Define a function called readfiles, which accepts a list of filenames as input and yields each line in each of the files with that 
 #  name, assuming those files exist in the same directory as this program.
+def readfiles(files):
+    for f in files:
+        file_reader = open(f, 'r')
+        for line in file_reader:
+            yield line
+        file_reader.close()
 
 ## Define a generator called len_check which accepts a generator of file lines and returns a generator object of all the lines it's 
 #  accepted whose length is longer than 40 characters.
+def len_check(file_gen):
+    for line in file_gen:
+        if len(file_gen) > 40:
+            yield line 
 
 ## Finally, write a function called main_filterer that accepts a list of filenames (strings), and returns a generator of all the 
 ## lines in those files that are longer than 40 characters. The function should invoke the other function and generator, readfiles 
@@ -291,11 +301,11 @@ class Problem9(unittest.TestCase):
     def test_names_without_much_seniority(self):
         self.assertEqual(names_with_not_too_much_seniority,['Albert', 'Mai', 'Dinesh', 'Euijin'])
 
-# class Problem10(unittest.TestCase):
-#     def test_generator1(self):
-#         self.assertEqual(list(readfiles(["samplehw6_1.txt","samplehw6_2.txt"])),['hihihi\n', 'this is a very long line that is more than thirty or forty characters long\n', 'supercalifragilistic\n', 'supercalifragilisticexpialidocioussupercalifragilisticexpialidocious', '\n', 'Where Does the Dance Begin, Where Does It End?\n', '\n', "Don't call this world adorable, or useful, that's not it.\n", "It's frisky, and a theater for more than fair winds.\n", 'The eyelash of lightning is neither good nor evil.\n', 'The struck tree burns like a pillar of gold.\n', '\n', 'But the blue rain sinks, straight to the white\n', 'feet of the trees\n', 'whose mouths open.\n', "Doesn't the wind, turning in circles, invent the dance?\n", "Haven't the flowers moved, slowly, across Asia, then Europe,\n", 'until at last, now, they shine\n', 'in your own yard?\n', '\n', "Don't call this world an explanation, or even an education.\n", '\n', 'When the Sufi poet whirled, was he looking\n', 'outward, to the mountains so solidly there\n', 'in a white-capped ring, or was he looking\n', '\n', 'to the center of everything: the seed, the egg, the idea\n', 'that was also there,\n', 'beautiful as a thumb\n', 'curved and touching the finger, tenderly,\n', 'little love-ring,\n', '\n', 'as he whirled,\n', 'oh jug of breath,\n', 'in the garden of dust?\n', '\n', '-Mary Oliver'], "Testing that readfiles works correctly")
-#     def test_generator2(self):
-#         self.assertEqual(list(len_check(readfiles(["samplehw6_1.txt","samplehw6_2.txt"]))),['this is a very long line that is more than thirty or forty characters long\n', 'supercalifragilisticexpialidocioussupercalifragilisticexpialidocious', 'Where Does the Dance Begin, Where Does It End?\n', "Don't call this world adorable, or useful, that's not it.\n", "It's frisky, and a theater for more than fair winds.\n", 'The eyelash of lightning is neither good nor evil.\n', 'The struck tree burns like a pillar of gold.\n', 'But the blue rain sinks, straight to the white\n', "Doesn't the wind, turning in circles, invent the dance?\n", "Haven't the flowers moved, slowly, across Asia, then Europe,\n", "Don't call this world an explanation, or even an education.\n", 'When the Sufi poet whirled, was he looking\n', 'outward, to the mountains so solidly there\n', 'in a white-capped ring, or was he looking\n', 'to the center of everything: the seed, the egg, the idea\n', 'curved and touching the finger, tenderly,\n'])
+class Problem10(unittest.TestCase):
+    def test_generator1(self):
+        self.assertEqual(list(readfiles(["samplehw6_1.txt","samplehw6_2.txt"])),['hihihi\n', 'this is a very long line that is more than thirty or forty characters long\n', 'supercalifragilistic\n', 'supercalifragilisticexpialidocioussupercalifragilisticexpialidocious', '\n', 'Where Does the Dance Begin, Where Does It End?\n', '\n', "Don't call this world adorable, or useful, that's not it.\n", "It's frisky, and a theater for more than fair winds.\n", 'The eyelash of lightning is neither good nor evil.\n', 'The struck tree burns like a pillar of gold.\n', '\n', 'But the blue rain sinks, straight to the white\n', 'feet of the trees\n', 'whose mouths open.\n', "Doesn't the wind, turning in circles, invent the dance?\n", "Haven't the flowers moved, slowly, across Asia, then Europe,\n", 'until at last, now, they shine\n', 'in your own yard?\n', '\n', "Don't call this world an explanation, or even an education.\n", '\n', 'When the Sufi poet whirled, was he looking\n', 'outward, to the mountains so solidly there\n', 'in a white-capped ring, or was he looking\n', '\n', 'to the center of everything: the seed, the egg, the idea\n', 'that was also there,\n', 'beautiful as a thumb\n', 'curved and touching the finger, tenderly,\n', 'little love-ring,\n', '\n', 'as he whirled,\n', 'oh jug of breath,\n', 'in the garden of dust?\n', '\n', '-Mary Oliver'], "Testing that readfiles works correctly")
+    def test_generator2(self):
+        self.assertEqual(list(len_check(readfiles(["samplehw6_1.txt","samplehw6_2.txt"]))),['this is a very long line that is more than thirty or forty characters long\n', 'supercalifragilisticexpialidocioussupercalifragilisticexpialidocious', 'Where Does the Dance Begin, Where Does It End?\n', "Don't call this world adorable, or useful, that's not it.\n", "It's frisky, and a theater for more than fair winds.\n", 'The eyelash of lightning is neither good nor evil.\n', 'The struck tree burns like a pillar of gold.\n', 'But the blue rain sinks, straight to the white\n', "Doesn't the wind, turning in circles, invent the dance?\n", "Haven't the flowers moved, slowly, across Asia, then Europe,\n", "Don't call this world an explanation, or even an education.\n", 'When the Sufi poet whirled, was he looking\n', 'outward, to the mountains so solidly there\n', 'in a white-capped ring, or was he looking\n', 'to the center of everything: the seed, the egg, the idea\n', 'curved and touching the finger, tenderly,\n'])
 
 
 if __name__ == "__main__":
